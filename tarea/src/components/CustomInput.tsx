@@ -6,6 +6,7 @@ interface CustomInputProps {
   value: string;                // Valor del input
   onChangeText: (text: string) => void; // Funcion para cambiar el valor
   numeric?: boolean;            // Si es true, solo acepta numeros
+  placeholder?: string;        // Texto placeholder del input
 }
 
 export default function CustomInput({
@@ -13,6 +14,7 @@ export default function CustomInput({
   value,
   onChangeText,
   numeric = false,
+  placeholder = "",
 }: CustomInputProps) {
 
   // Funcion para validar si es numero
@@ -27,8 +29,10 @@ export default function CustomInput({
 
       {/* Input */}
       <TextInput
+     
         style={styles.input}
         value={value}
+        placeholder={placeholder}
         keyboardType={numeric ? "numeric" : "default"} // operador ternario
         onChangeText={(text) => {
           // Validación si es numerico

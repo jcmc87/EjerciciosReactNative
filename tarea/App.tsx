@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import CustomInput from "./src/components/CustomInput";
 import CustomButton from "./src/components/CustomButtons";
 
@@ -19,6 +20,9 @@ export default function App() {
   // Ejercicio 2 - Contador
   const [contador, setContador] = useState(0);
 
+  // Ejercicio 3 - Visibilidad
+  const [mostrarDetalles, setMostrarDetalles] = useState(false);
+ 
   return (
     <View style={styles.container}>
 
@@ -26,6 +30,7 @@ export default function App() {
 
       {/* Input Nombre */}
       <CustomInput
+        placeholder="Nombre"
         title="Nombre"
         value={usuario.nombre}
         onChangeText={(text) =>
@@ -35,6 +40,7 @@ export default function App() {
 
       {/* Input Edad */}
       <CustomInput
+        placeholder="Edad"
         title="Edad"
         value={usuario.edad}
         numeric={true}
@@ -50,7 +56,7 @@ export default function App() {
         </Text>
       ) : (
         <Text style={styles.error}>
-          ingrese un nombre y una edad válida
+          ingrese un nombre y una edad valida
         </Text>
       )}
 
@@ -81,6 +87,26 @@ export default function App() {
         onClick={() => setContador(contador - 1)}
         variant="secondary"
       />
+
+       {/* Ejercicio 3  */}
+      <Text style={styles.title}>Detalles</Text>
+
+      <CustomButton
+        title={mostrarDetalles ? "Ocultar detalles" : "Mostrar detalles"}
+        onClick={() => setMostrarDetalles(!mostrarDetalles)}
+      />
+
+      <Ionicons
+        name={mostrarDetalles ? "eye-off" : "eye"}
+        size={40}
+        color={mostrarDetalles ? "purple" : "blue"}
+      />
+      {mostrarDetalles ? (
+        <Text style={styles.success}>Detalles del usuario...</Text>
+      ) : (
+        <Text style={styles.error}>Detalles ocultos</Text>
+      )}
+
 
     </View>
   );
@@ -120,10 +146,10 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   par: {
-    color: "green"
+    color: "blue"
   },
   impar: {
-    color: "red"
+    color: "purple"
   }
 
 });
